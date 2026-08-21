@@ -1,0 +1,85 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "refresh_interval": "1s"
+    }
+  },
+  "mappings": {
+    "dynamic": false,
+    "properties": {
+      "q_1024_vec": {
+        "type": "dense_vector",
+        "index": true,
+        "similarity": "cosine",
+        "dims": 1024
+      },
+      "content_ltks": {
+        "type": "text",
+        "analyzer": "whitespace"
+      },
+      "content_sm_ltks": {
+        "type": "text",
+        "analyzer": "whitespace"
+      },
+      "content_with_weight": {
+        "type": "text",
+        "index": false
+      },
+      "title_tks": {
+        "type": "text",
+        "analyzer": "whitespace"
+      },
+      "title_sm_tks": {
+        "type": "text",
+        "analyzer": "whitespace"
+      },
+      "important_kwd": {
+        "type": "keyword"
+      },
+      "important_tks": {
+        "type": "text",
+        "analyzer": "whitespace"
+      },
+      "question_kwd": {
+        "type": "keyword"
+      },
+      "question_tks": {
+        "type": "text",
+        "analyzer": "whitespace"
+      },
+      "kb_id": {
+        "type": "keyword"
+      },
+      "doc_id": {
+        "type": "keyword"
+      },
+      "docnm_kwd": {
+        "type": "keyword"
+      },
+      "docnm": {
+        "type": "keyword"
+      },
+      "create_time": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "create_timestamp_flt": {
+        "type": "float"
+      },
+      "available_int": {
+        "type": "integer"
+      },
+      "page_num_int": {
+        "type": "integer"
+      },
+      "position_int": {
+        "type": "integer"
+      },
+      "top_int": {
+        "type": "integer"
+      }
+    }
+  }
+}

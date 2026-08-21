@@ -1,0 +1,9 @@
+.env
+**/__pycache__/
+**/*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+app/service/core/storage/
+app/storage/
+test-uploads/

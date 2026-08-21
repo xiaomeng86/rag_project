@@ -1,0 +1,12 @@
+.env
+**/.env
+**/.git/
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.cache/
+**/.pnpm-store/
+**/.DS_Store
+*.log

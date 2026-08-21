@@ -1,0 +1,49 @@
+#
+#  Copyright 2024 The InfiniFlow Authors. All Rights Reserved.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+
+import os
+import re
+import tiktoken
+from service.core.api.utils.file_utils import get_project_base_directory
+
+def singleton(cls, *args, **kw):
+    instances = {}
+
+    def _singleton():
+        key = str(cls) + str(os.getpid())
+        if key not in instances:
+            instances[key] = cls(*args, **kw)
+        return instances[key]
+
+    return _singleton
+
+
+def rmSpace(txt):
+    txt = re.sub(r"([^a-z0-9.,\)>]) +([^ ])", r"\1\2", txt, flags=re.IGNORECASE)
+    return re.sub(r"([^ ]) +([^a-z0-9.,\(<])", r"\1\2", txt, flags=re.IGNORECASE)
+
+
+tiktoken_cache_dir = get_project_base_directory("rag", "res", "tiktoken")
+os.environ["TIKTOKEN_CACHE_DIR"] = tiktoken_cache_dir
+encoder = tiktoken.get_encoding("cl100k_base")
+
+
+def num_tokens_from_string(string: str) -> int:
+    """Returns the number of tokens in a text string."""
+    try:
+        return len(encoder.encode(string))
+    except Exception:
+        return 0
